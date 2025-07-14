@@ -224,8 +224,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Activate the first player tab and scorecard by default
-    if (playerScorecardTabsContainer.firstElementChild) {
-      playerScorecardTabsContainer.firstElementChild.classList.add("active");
+    const firstPlayerTab = playerTabsWrapper.firstElementChild;
+    if (firstPlayerTab) {
+      firstPlayerTab.classList.add("active");
       const firstPlayerCard = scorecardContent.firstElementChild;
       if (firstPlayerCard) {
         firstPlayerCard.classList.add("active");
@@ -291,9 +292,11 @@ document.addEventListener("DOMContentLoaded", () => {
       0,
       (parseInt(modalScoreInput.value) || 0) - 1
     );
+    saveScoreFromModal();
   });
   modalPlusBtn.addEventListener("click", () => {
     modalScoreInput.value = (parseInt(modalScoreInput.value) || 0) + 1;
+    saveScoreFromModal();
   });
   modalSaveBtn.addEventListener("click", saveScoreFromModal);
   modalCloseBtn.addEventListener("click", closeScoreModal);
@@ -344,7 +347,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const updateTotalScore = (player, playerCardElement) => {
     const total =
       player.scores.reduce((sum, score) => sum + score, 0) + player.key;
-    playerCardElement.querySelector(".total-score-display").textContent = total;
+    playerCardElement.querySelector(
+      ".total-score-display"
+    ).textContent = `Total: ${total}`;
 
     // Update the score on the tab
     const playerTab = document.querySelector(
