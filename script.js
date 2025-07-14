@@ -252,8 +252,9 @@ document.addEventListener("DOMContentLoaded", () => {
       currentValue = player.scores[spaceIndex];
     }
 
-    modalScoreInput.value = currentValue;
+    modalScoreInput.value = currentValue === 0 ? "" : currentValue;
     scoreModal.style.display = "flex";
+    modalScoreInput.focus();
   };
 
   const closeScoreModal = () => {

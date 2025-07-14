@@ -1,5 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
+html {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+* {
+  touch-action: manipulation;
+}
+
 :root {
   --primary-gradient: linear-gradient(
     135deg,
@@ -617,8 +631,14 @@ body {
   margin: 20px 0;
 }
 
+.modal-input-group .btn-score-adjust {
+  width: 50px;
+  height: 40px;
+  font-size: 1.5em;
+}
+
 .modal-score-input {
-  width: 100px;
+  width: 150px;
   font-size: 2em;
   text-align: center;
   border: 2px solid #ddd;
