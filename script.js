@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Add player
-  addPlayerButton.addEventListener("click", () => {
+  const addPlayer = () => {
     const name = playerNameInput.value.trim();
     if (name) {
       if (
@@ -123,6 +123,16 @@ document.addEventListener("DOMContentLoaded", () => {
       renderPlayerList();
       savePlayers();
       renderScorecards(); // Update scorecards
+    }
+  };
+
+  addPlayerButton.addEventListener("click", addPlayer);
+
+  // Add Enter key functionality to player name input
+  playerNameInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      addPlayer();
     }
   });
 
@@ -322,6 +332,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   modalSaveBtn.addEventListener("click", saveScoreFromModal);
   modalCloseBtn.addEventListener("click", closeScoreModal);
+
+  // Add Enter key functionality to modal score input
+  modalScoreInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      saveScoreFromModal();
+    }
+  });
   scoreModal.addEventListener("click", (event) => {
     if (event.target === scoreModal) {
       closeScoreModal();
