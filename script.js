@@ -286,17 +286,39 @@ document.addEventListener("DOMContentLoaded", () => {
     closeScoreModal();
   };
 
+  const saveScoreWithoutClosing = () => {
+    const player = players.find((p) => p.name === activePlayerName);
+    if (!player) return;
+
+    const newValue = parseInt(modalScoreInput.value) || 0;
+
+    if (activeIsKey) {
+      player.key = newValue;
+    } else {
+      player.scores[activeSpaceIndex] = newValue;
+    }
+
+    savePlayers();
+    renderScorecards();
+    setTimeout(() => {
+      const activeTab = document.querySelector(
+        `.player-scorecard-tab[data-name="${activePlayerName}"]`
+      );
+      if (activeTab) activeTab.click();
+    }, 0);
+  };
+
   // Event listeners for modal
   modalMinusBtn.addEventListener("click", () => {
     modalScoreInput.value = Math.max(
       0,
       (parseInt(modalScoreInput.value) || 0) - 1
     );
-    saveScoreFromModal();
+    saveScoreWithoutClosing();
   });
   modalPlusBtn.addEventListener("click", () => {
     modalScoreInput.value = (parseInt(modalScoreInput.value) || 0) + 1;
-    saveScoreFromModal();
+    saveScoreWithoutClosing();
   });
   modalSaveBtn.addEventListener("click", saveScoreFromModal);
   modalCloseBtn.addEventListener("click", closeScoreModal);
